@@ -4,13 +4,13 @@ class Worker extends Person {
 
     #rate = 1000;
     #days = 0;
-    #birthdayDate = "01.14.1990"
 
-    constructor(firstName, lastName, position) {
-        super(firstName, lastName);
+    constructor(firstName, lastName, birthday, position) {
+        super();
             this.firstName = firstName;
             this.lastName = lastName;
             this.position = position;
+            this.birthday = birthday;
 
     }
 
@@ -42,11 +42,13 @@ class Worker extends Person {
     }
 
     getSalary() {
-       let personBirthdayMonth = new Date(this.#birthdayDate)
+        let personBirthdayMonth = new Date(this.birthday)
         let todayDate = new Date()
-       let currentSalary = this.currentDaysInMonth() * this.#rate
+        let currentSalary = this.currentDaysInMonth() * this.#rate
         if (personBirthdayMonth === todayDate) {
-          return currentSalary = currentSalary + currentSalary * (10 / 100);
+            currentSalary = currentSalary + currentSalary * (10 / 100);
+
+            return currentSalary
         }
 
         return `Зарплата за месяц : ${currentSalary}`
@@ -62,11 +64,39 @@ class Worker extends Person {
         return currentMonthDays
     }
 
-    static whoWorkedMore(...objects) {
 
+    //Егор, с изменениями данных вроде отрабатывает. Визуально можно было бы конечно по красивее это вывести,
+    // ну по крайней мере я бы переделал это не выходя из тела foreach(если я прав) =) Но Егор в любом случае знает более изящный вариант!)
+    static whoWorkedMore(...workers) {
+        let maxNum = 0;
+
+        workers.forEach(day => {
+            if (maxNum < day.days) {
+                maxNum = day.days
+            }
+        })
+
+       let maxWorkingDays = workers.filter(worker => {
+            if (worker.days === maxNum){
+               return console.log(`Больше всех отработал ${worker.getFullName()}. Количество рабочих дней ${maxNum}`)
+            }
+
+        })
     }
 
     static whoIsYounger(...workers) {
+        let currentYear = new Date()
+        // let workerYear = new Date(this.birthday).getFullYear();
+        let maxNum = 0;
+        console.log(currentYear)
+        workers.forEach(birth => {
+                let workerDate = birth.birthday.split('/');
+                let currentWorkerYear = new Date(workerDate[1] + '/' +workerDate[1] + '/' +workerDate[2])
+            console.log(workerDate)
+            if (birth.birthday) {
+            }
+        })
+
 
     }
 
@@ -76,8 +106,8 @@ class Worker extends Person {
 
 const worker = new Worker();
 
-console.log(worker.addDays(22))
-console.log(worker)
+// console.log(worker.addDays(22))
+// console.log(worker)
 
 export { Worker };
 

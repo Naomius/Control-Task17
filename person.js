@@ -1,6 +1,6 @@
  class Person {
 
-    #birthdayDate = '01.14.1990';
+    #birthdayDate;
 
     constructor(firstName, lastName) {
         this.firstName = firstName;
@@ -9,16 +9,20 @@
     }
 
     get birthday() {
-        let todayYear = new Date().getFullYear();
-        let personBirthday = new Date(this.#birthdayDate).getFullYear();
-        let result = todayYear - personBirthday;
+        return this.#birthdayDate;
+    }
 
-        return +result;
+    set birthday(data) {
+        this.#birthdayDate = data;
     }
 
     getFullName() {
         return `${this.firstName} ${this.lastName}`;
     }
+
+
+    //Егор, у меня до переделки геттера(в котором была конструкция выводящая одной цифрой возраст)
+     //теперь не знаю куда её будет точнее применить. Или правильнее будет сам getAge переработать, в switch конструкцию другую.
 
     getAge() {
         let count = this.birthday % 100;
@@ -31,11 +35,15 @@
             }
     }
 
+    showData() {
+        console.log(`${this.firstName} ${this.lastName} ${this.birthday} ${this.getAge()}`)
+    }
+
 
 }
 
-    let person = new Person();
- // console.log(person.birthday)
+const person1 = new Person('Vasya', 'pupkin', '01.14.2000');
+ // person1.showData()
 
  export { Person } ;
 

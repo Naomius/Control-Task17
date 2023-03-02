@@ -36,7 +36,6 @@ class Worker extends Person {
     }
 
 
-
     addDays(days) {
         if (days > 0 && days <= this.currentDaysInMonth()) {
             return  this.#days = days;
@@ -71,8 +70,10 @@ class Worker extends Person {
     }
 
 
+
     static whoWorkedMore(...workers) {
         const maxDays = Math.max(...workers.map(w => w.daysWorker));
+
         workers
             .filter((w) => w.daysWorker === maxDays)
             .forEach((w) => console.log(`Больше всех отработал ${w.getFullName()}. Количество рабочих дней ${maxDays}`));
@@ -95,19 +96,22 @@ class Worker extends Person {
     }
 
     static whoIsYounger(...workers) {
-        let currentYear = new Date().getFullYear()
-        // const [, , year] = workers[0].birthday.split('-');
-        // const workerAge = +currentYear - +year;
-        // console.log(+workerAge)
-        let minNum = 0;
+        let currentYear = new Date().getFullYear();
 
         const minWorkersAge = Math.min(...workers.map(w => {
             let [, , year] = w.birthday.split('-');
-            const workersAge = +currentYear - +year;
-            let numOp = Math.min(workersAge)
-
-        console.log(numOp)
+            const youngerWorkersAge = +currentYear - +year;
+                return +youngerWorkersAge
         }));
+            workers
+                .filter(worker => {
+                    let [, , year] = (worker.birthday.split('-'))
+                    const WorkersAge = +currentYear - +year;
+                    if (+WorkersAge === +minWorkersAge) {
+                        return worker
+                    }
+                })
+                .forEach(worker => console.log(`${worker.getFullName()} ${worker.getAge()}`))
     }
 
 

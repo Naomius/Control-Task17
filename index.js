@@ -14,8 +14,14 @@ worker3.addDays(25);
 worker4.addDays(18);
 worker5.addDays(10);
 
-// console.log(worker1.getSalary());
-// console.log(worker1.getAge())
+worker1.rate = 3000
+worker2.rate = 2000
+worker3.rate = 1000
+
+console.log(worker1.getSalary())
+console.log(worker2.getSalary())
+console.log(worker3.getSalary())
+
 
 Worker.whoWorkedMore(worker1, worker2, worker3, worker4, worker5);
 Worker.whoIsYounger(worker1, worker2, worker3, worker4, worker5);
